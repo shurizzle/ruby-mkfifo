@@ -2,4 +2,7 @@
 
 == 0.1.0
 
+* File::mkfifo now raises +TypeError+ instead of +ArgumentError+ for
+  an object of incorrect type. (Quintus)
+* File::mkfifo now accepts Pathname objects. (Quintus)
 * File::mkfifo now raises +IOError+ instead of +Exception+. (Quintus)

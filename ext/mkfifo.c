@@ -1,4 +1,5 @@
 #include <ruby/ruby.h>
+#include <string.h>
 #include <sys/stat.h>
 
 VALUE rb_cFile_mkfifo(VALUE, VALUE);
@@ -17,8 +18,13 @@ void Init_mkfifo() {
  */
 VALUE
 rb_cFile_mkfifo(VALUE self, VALUE name) {
+    /* Accept Pathname objects */
+    if (strcmp(rb_obj_classname(name), "Pathname") == 0)
+        name = rb_funcall(name, rb_intern("to_s"), 0);
+
+    /* Accept String objects */
     if (rb_type(name) != T_STRING) {
-        rb_raise(rb_eArgError, "Argument must be a string");
+        rb_raise(rb_eTypeError, "Argument must be a String or Pathname");
     }
 
     if (mkfifo(RSTRING_PTR(name), S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP) < 0) {
