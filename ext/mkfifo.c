@@ -7,6 +7,14 @@ void Init_mkfifo() {
     rb_define_singleton_method(rb_cFile, "mkfifo", rb_cFile_mkfifo, 1);
 }
 
+/* Document-method: File::mkfifo
+ * 
+ * call-seq:
+ * mkfifo(path) → an_integer
+ *
+ * Creates a named pipe at +path+. Raises +IOError+ if
+ * the operation fails.
+ */
 VALUE
 rb_cFile_mkfifo(VALUE self, VALUE name) {
     if (rb_type(name) != T_STRING) {
