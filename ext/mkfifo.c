@@ -14,7 +14,7 @@ rb_cFile_mkfifo(VALUE self, VALUE name) {
     }
 
     if (mkfifo(RSTRING_PTR(name), S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP) < 0) {
-        rb_raise(rb_eException, "Cannot create named pipe");
+        rb_raise(rb_eIOError, "Cannot create named pipe");
     }
 
     return INT2FIX(1);
