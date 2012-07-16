@@ -1,0 +1,8 @@
+= mkfifo
+Binds the mkfifo(3) function to Ruby as a class method for Ruby’s
+built-in +File+ class.
+
+== Usage
+
+  require "mkfifo"
+  File.mkfifo('/path/to/file')
