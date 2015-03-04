@@ -19,14 +19,7 @@ Init_mkfifo(void) {
  */
 VALUE
 rb_cFile_mkfifo(VALUE self, VALUE name) {
-    /* Accept Pathname objects */
-    if (strcmp(rb_obj_classname(name), "Pathname") == 0)
-        name = rb_funcall(name, rb_intern("to_s"), 0);
-
-    /* Accept String objects */
-    if (rb_type(name) != T_STRING) {
-        rb_raise(rb_eTypeError, "Argument must be a String or Pathname");
-    }
+    FilePathValue(name);
 
     if (mkfifo(RSTRING_PTR(name), S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP) < 0) {
         rb_raise(rb_eIOError, "Cannot create named pipe");
