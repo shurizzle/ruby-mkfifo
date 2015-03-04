@@ -4,12 +4,13 @@
 
 VALUE rb_cFile_mkfifo(VALUE, VALUE);
 
-void Init_mkfifo() {
+void
+Init_mkfifo(void) {
     rb_define_singleton_method(rb_cFile, "mkfifo", rb_cFile_mkfifo, 1);
 }
 
 /* Document-method: File::mkfifo
- * 
+ *
  * call-seq:
  * mkfifo(path) → an_integer
  *
