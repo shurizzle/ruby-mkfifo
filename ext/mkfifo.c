@@ -14,8 +14,8 @@ Init_mkfifo(void) {
  * call-seq:
  * mkfifo(path[, mode]) -> an_integer
  *
- * Creates a named pipe at +path+. Raises +IOError+ if
- * the operation fails.
+ * Creates a named pipe at +path+. Raises +SystemCallError+ if the
+ * operation fails.
  * If +mode+ is given, creates +path+ with the permission.  If it is
  * not given or _nil_, user and group are readable and writable.
  */
@@ -37,7 +37,7 @@ rb_cFile_mkfifo(int argc, VALUE *argv, VALUE self) {
     if (!NIL_P(mode)) perm = NUM2MODET(mode);
 
     if (mkfifo(RSTRING_PTR(name), perm) < 0) {
-        rb_raise(rb_eIOError, "Cannot create named pipe");
+	rb_sys_fail_str(name);
     }
 
     return INT2FIX(1);
